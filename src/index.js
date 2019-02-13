@@ -1,17 +1,19 @@
 import { ApolloServer } from 'apollo-server-cloud-functions';
-import typeDefs from './shared/type-defs';
-import resolvers from './shared/resolvers';
+import schema from './shared/schema';
+
+const production = process.env.STAGE === 'prod';
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: ({ req, res }) => ({
-    headers: req.headers,
-    req,
-    res
-  }),
-  playground: true,
-  introspection: true
+    schema,
+    context: ({ req, res }) => ({
+        headers: req.headers,
+        req,
+        res
+    }),
+    playground: !production,
+    introspection: !production,
+    tracing: !production,
+    cacheControl: !production
 });
 
 // eslint-disable-next-line import/prefer-default-export

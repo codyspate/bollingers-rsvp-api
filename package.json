@@ -1,31 +1,35 @@
 {
-  "name": "api",
-  "version": "0.1.0",
-  "description": "",
-  "main": "lib/index.js",
-  "scripts": {
-    "build": "babel src -d lib",
-    "predeploy": "npm run build",
-    "deploy": "sls deploy -v"
-  },
-  "author": "Timothy Cody Spate",
-  "license": "MIT",
-  "devDependencies": {
-    "@babel/cli": "^7.2.3",
-    "@babel/core": "^7.2.2",
-    "@babel/plugin-proposal-object-rest-spread": "^7.3.2",
-    "@babel/preset-env": "^7.3.1",
-    "eslint": "^5.3.0",
-    "eslint-config-airbnb-base": "^13.1.0",
-    "eslint-config-prettier": "^4.0.0",
-    "eslint-plugin-import": "^2.16.0",
-    "eslint-plugin-prettier": "^3.0.1",
-    "prettier": "^1.16.4",
-    "serverless": "^1.37.1",
-    "serverless-google-cloudfunctions": "*"
-  },
-  "dependencies": {
-    "apollo-server-cloud-functions": "^2.4.0",
-    "graphql": "^14.1.1"
-  }
+    "name": "api",
+    "version": "0.1.0",
+    "description": "",
+    "main": "lib/index.js",
+    "scripts": {
+        "test": "jest",
+        "build": "babel src -d lib --ignore 'src /**/*.spec.js','src /**/*.test.js'",
+        "predeploy": "npm run build",
+        "deploy": "sls deploy -v"
+    },
+    "author": "Timothy Cody Spate",
+    "license": "MIT",
+    "devDependencies": {
+        "@babel/cli": "^7.2.3",
+        "@babel/core": "^7.2.2",
+        "@babel/preset-env": "^7.3.1",
+        "babel-jest": "^24.1.0",
+        "eslint": "^5.3.0",
+        "eslint-config-airbnb-base": "^13.1.0",
+        "eslint-config-prettier": "^4.0.0",
+        "eslint-plugin-import": "^2.16.0",
+        "eslint-plugin-jest": "^22.2.2",
+        "eslint-plugin-prettier": "^3.0.1",
+        "jest": "^24.1.0",
+        "prettier": "^1.16.4",
+        "serverless": "^1.37.1",
+        "serverless-google-cloudfunctions": "*"
+    },
+    "dependencies": {
+        "apollo-server-cloud-functions": "^2.4.0",
+        "graphql": "^14.1.1",
+        "graphql-tools": "^4.0.4"
+    }
 }
