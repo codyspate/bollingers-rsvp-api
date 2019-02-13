@@ -1,11 +1,15 @@
-service: api # NOTE: Don't put the word "google" in here
+service: bollinger-rsvp # NOTE: Don't put the word "google" in here
 
 provider:
   name: google
   runtime: nodejs
-  project: my-project
+  project: bollingers-${self:custom.stage}
   # the path to the credentials file needs to be absolute
-  credentials: ./keyfile.json
+  credentials: keyfile-${self:custom.stage}.json
+
+custom:
+  stage: ${opt:stage}
+  environment: ${file(.env.yml):${self:custom.stage}}
 
 plugins:
   - serverless-google-cloudfunctions
@@ -19,10 +23,10 @@ package:
     - .git/**
 
 functions:
-  first:
-    handler: http
+  graphql:
+    handler: graphql
     events:
-      - http: path
+      - http: /
   # NOTE: the following uses an "event" event (pubSub event in this case).
   # Please create the corresponding resources in the Google Cloud
   # before deploying this service through Serverless

@@ -2,14 +2,15 @@
   "name": "api",
   "version": "0.1.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src -d lib",
+    "predeploy": "npm run build",
+    "deploy": "sls deploy -v"
   },
-  "author": "serverless.com",
+  "author": "Timothy Cody Spate",
   "license": "MIT",
   "devDependencies": {
-    "serverless-google-cloudfunctions": "*",
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.2.2",
     "@babel/preset-env": "^7.3.1",
@@ -18,6 +19,12 @@
     "eslint-config-prettier": "^4.0.0",
     "eslint-plugin-import": "^2.16.0",
     "eslint-plugin-prettier": "^3.0.1",
-    "prettier": "^1.16.4"
+    "prettier": "^1.16.4",
+    "serverless": "^1.37.1",
+    "serverless-google-cloudfunctions": "*"
+  },
+  "dependencies": {
+    "apollo-server-cloud-functions": "^2.4.0",
+    "graphql": "^14.1.1"
   }
 }
