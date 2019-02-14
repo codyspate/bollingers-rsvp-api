@@ -1,5 +1,5 @@
 import { ApolloServer } from 'apollo-server-cloud-functions';
-import schema from './shared/schema';
+import schema from './graphql/shared/schema';
 
 const production = process.env.STAGE === 'prod';
 

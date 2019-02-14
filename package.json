@@ -30,6 +30,7 @@
     "dependencies": {
         "apollo-server-cloud-functions": "^2.4.0",
         "graphql": "^14.1.1",
-        "graphql-tools": "^4.0.4"
+        "graphql-tools": "^4.0.4",
+        "mongoose": "^5.4.12"
     }
 }
