@@ -11,7 +11,8 @@ const userSchema = new mongoose.Schema({
     createdAt: { type: Types.Date }
 });
 
-userSchema.pre('save', next => {
+/* eslint-disable func-names */
+userSchema.pre('save', function(next) {
     this.createdAt = Date.now();
     next();
 });

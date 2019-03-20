@@ -1,35 +1,53 @@
 import User from './model';
-import { sign, decode } from '../utils/jwt';
+import { sign } from '../utils/jwt';
+import { createToken } from './utils';
 
 export default {
-    signUp: async (_, { username, password, email }) => {
-        const token = sign(password);
-        await User.create({
-            username,
-            password: token,
-            email
-        });
-        return sign({ token }, { expiresIn: '30d' });
+    Query: {
+        health: () => true
     },
-    signIn: async (_, { username, password }) => {
-        let user;
-        try {
-            user = await User.find().or([{ username }, { email: username }]);
-        } catch (e) {
-            throw e;
+    Mutation: {
+        signUp: async (_, { firstname, lastname, password, email }) => {
+            const token = sign(password);
+            const user = await User.create({
+                firstname,
+                lastname,
+                password: token,
+                email,
+                username: email
+            });
+            const authToken = createToken(user);
+            user.password = undefined;
+            return {
+                token: authToken,
+                user
+            };
+        },
+        signIn: async (_, { email, password }, { user: usr }) => {
+            try {
+                const user = await (() => {
+                    if (usr) return usr;
+                    try {
+                        return User.findOne({ email });
+                    } catch (e) {
+                        throw e;
+                    }
+                })();
+                if (!user) throw new Error('User not found');
+                if (!usr) {
+                    const token = sign(password);
+                    if (user.password !== token)
+                        throw new Error('Invalid username or password');
+                }
+                const authToken = createToken(user);
+                user.password = undefined;
+                return {
+                    token: authToken,
+                    user
+                };
+            } catch (e) {
+                throw e;
+            }
         }
-        if (!user) throw new Error('User not found');
-        const token = sign(password);
-        if (user.password !== token)
-            throw new Error('Invalid username or password');
-        return sign({ token }, { exipresIn: '60d' });
-    },
-    signInWithToken: async (_, { username, token }) => {
-        const user = await User.find({ username });
-        if (!user) throw new Error('User not found');
-        const { token: decodedToken, exp } = decode(token);
-        if (exp < Date.now()) throw new Error('Token is expired');
-        if (user.password !== decodedToken) throw new Error('Invalid token');
-        return sign({ token: decodedToken }, { exipresIn: '60d' });
     }
 };
