@@ -6,6 +6,7 @@ export const createToken = ({ _id, email }) => {
 };
 
 export const getUserFromToken = token => {
-    const { user: { _id } = {} } = decode(token);
+    const { user: { _id } = {} } = decode(token) || {};
+    if (!_id) return null;
     return User.findOne({ _id });
 };

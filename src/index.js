@@ -5,8 +5,8 @@ import { getUserFromToken } from './graphql/user/utils';
 const production = process.env.STAGE === 'prod';
 
 const getContext = async ({ req }) => {
-    const { headers: { authorization } = {} } = req;
-    const user = await getUserFromToken(authorization);
+    const { cookies: { token } = {} } = req;
+    const user = await getUserFromToken(token);
     return { user };
 };
 
