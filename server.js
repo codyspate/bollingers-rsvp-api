@@ -4,7 +4,15 @@ const cors = require('cors');
 const { config } = require('./lib/index');
 
 const app = express();
-app.use(cors());
+app.use(
+    cors({
+        origin: (origin, cb) => {
+            cb(null, true);
+        },
+        credentials: true,
+        allowedHeaders: ['Content-Type', 'authorization']
+    })
+);
 const server = new ApolloServer(config);
 server.applyMiddleware({ app });
 

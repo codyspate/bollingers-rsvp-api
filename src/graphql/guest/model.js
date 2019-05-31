@@ -4,10 +4,11 @@ const {
     Schema: { Types }
 } = mongoose;
 
-const guestSchema = new mongoose.Schema({
+export const guestSchema = new mongoose.Schema({
     firstName: String,
     lastName: String,
-    mealChoice: { type: Types.ObjectId, ref: 'MealOption' }
+    mealChoice: { type: Types.ObjectId, ref: 'MealOption' },
+    songRecommendation: String
 });
 
 export default mongoose.model('Guest', guestSchema);
