@@ -5,11 +5,11 @@ const {
 } = mongoose;
 
 export const guestSchema = new mongoose.Schema({
-    firstName: String,
-    lastName: String,
+    firstName: { type: String, index: true },
+    lastName: { type: String, index: true },
     mealChoice: { type: Types.ObjectId, ref: 'MealOption' },
     songRecommendation: String,
-    status: { type: String, default: '' }
+    attending: Boolean
 });
 
 export default mongoose.model('Guest', guestSchema);

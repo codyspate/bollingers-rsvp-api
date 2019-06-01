@@ -7,11 +7,23 @@ const typeDefs = gql`
         lastName: String
         mealOption: String
         songRecommendation: String
-        status: String
+        attending: Boolean
+    }
+
+    input InputGuest2 {
+        firstName: String
+        lastName: String
+        mealOption: String
+        songRecommendation: String
+        attending: Boolean
     }
 
     type Query {
         guest(id: String): Guest
+    }
+
+    type Mutation {
+        guest(id: String!, updateFields: InputGuest2): Guest
     }
 `;
 
