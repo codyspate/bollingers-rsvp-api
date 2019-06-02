@@ -2,7 +2,9 @@ import Guest from './model';
 
 export default {
     Query: {
-        guest: (_, { id }) => Guest.findById(id)
+        guest: (_, { id }) => Guest.findById(id),
+        guests: (_, { firstName, lastName }) =>
+            Guest.findByName({ firstName, lastName })
     },
     Mutation: {
         guest: async (_, { id, updateFields }) => {

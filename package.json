@@ -43,6 +43,7 @@
         "graphql-tools": "^4.0.4",
         "jsonwebtoken": "^8.4.0",
         "jwt-simple": "^0.5.5",
-        "mongoose": "^5.4.12"
+        "mongoose": "^5.4.12",
+        "natural": "^0.6.3"
     }
 }

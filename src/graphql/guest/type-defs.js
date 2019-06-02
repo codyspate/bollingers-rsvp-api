@@ -19,7 +19,8 @@ const typeDefs = gql`
     }
 
     type Query {
-        guest(id: String): Guest
+        guest(id: String, firstName: String, lastName: String): Guest
+        guests(firstName: String, lastName: String): [Guest]
     }
 
     type Mutation {
