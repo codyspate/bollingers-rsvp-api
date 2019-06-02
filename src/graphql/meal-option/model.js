@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
-const MealOption = new mongoose.Schema({
+export const mealOptionSChema = new mongoose.Schema({
     name: String
 });
 
-export default mongoose.model('MealOption', MealOption);
+export default mongoose.model('MealOption', mealOptionSChema);
