@@ -20,8 +20,8 @@ const GuestModel = mongoose.model('Guest', guestSchema);
 // and sorted by relevance.
 // Returns an array of the top results.
 GuestModel.findByName = async ({ firstName = '', lastName = '' }) => {
-    const name = ({ firstName = '', lastName = '' }) =>
-        `${firstName.trim()} ${lastName.trim()}`.toLowerCase();
+    const name = ({ firstName: fName = '', lastName: lName = '' }) =>
+        `${fName.trim()} ${lName.trim()}`.toLowerCase();
     const searchName = name({ firstName, lastName });
     const distance = guest => LevenshteinDistance(searchName, name(guest));
 

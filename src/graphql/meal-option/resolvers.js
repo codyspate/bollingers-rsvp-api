@@ -6,8 +6,10 @@ export default {
     },
     Mutation: {
         mealOption: (_, { name }) => MealOption.create({ name }),
-        mealOptions: (_, { names = [] }) =>
-            MealOption.insertMany(names.map(name => ({ name }))),
+        mealOptions: async (_, { names = [] }) => {
+            await MealOption.deleteMany();
+            return MealOption.insertMany(names.map(name => ({ name })));
+        },
         removeMealOption: async (_, { id }) => {
             await MealOption.findOneAndRemove({ _id: id });
             return true;
