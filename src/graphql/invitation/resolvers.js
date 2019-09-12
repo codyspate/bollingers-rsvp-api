@@ -28,7 +28,6 @@ export default {
             if (removeAdditional) invitation.additionalGuests -= 1;
             newGuest.save();
             invitation.save();
-            console.log(invitation);
             return invitation;
         }
     },
