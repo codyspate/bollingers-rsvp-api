@@ -12,7 +12,7 @@ export default gql`
         _id: ID
         firstName: String
         lastName: String
-        mealOption: String
+        mealChoice: String
         songRecommendation: String
         attending: Boolean
     }
@@ -21,14 +21,21 @@ export default gql`
         firstName: String
         lastName: String
         attending: Boolean
+        mealChoice: String
+        additional: Boolean
     }
 
     type Query {
-        invitation(id: String): Invitation
+        invitation(id: String, guestId: String): Invitation
         invitations: [Invitation]
     }
 
     type Mutation {
         invitation(guests: [InputGuest]!, additionalGuests: Int): Invitation
+        addGuest(
+            invitationId: ID
+            guest: InputGuest
+            removeAdditional: Boolean
+        ): Invitation
     }
 `;

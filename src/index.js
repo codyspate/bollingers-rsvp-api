@@ -14,8 +14,8 @@ const getContext = async ({ req }) => {
 export const config = {
     schema,
     context: getContext,
-    playground: !production,
-    introspection: !production,
+    playground: true,
+    introspection: true,
     tracing: !production,
     cacheControl: !production
 };
@@ -23,4 +23,10 @@ export const config = {
 const server = new ApolloServer(config);
 
 // eslint-disable-next-line import/prefer-default-export
-export const graphql = server.createHandler();
+export const graphql = server.createHandler({
+    cors: {
+        origin: production,
+        credentials: production,
+        methods: ['GET', 'POST', 'OPTIONS']
+    }
+});

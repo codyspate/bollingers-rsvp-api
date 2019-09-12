@@ -5,7 +5,7 @@ const typeDefs = gql`
         _id: String
         firstName: String
         lastName: String
-        mealOption: String
+        mealChoice: String
         songRecommendation: String
         attending: Boolean
     }
@@ -13,7 +13,7 @@ const typeDefs = gql`
     input InputGuest2 {
         firstName: String
         lastName: String
-        mealOption: String
+        mealChoice: String
         songRecommendation: String
         attending: Boolean
     }

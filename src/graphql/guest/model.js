@@ -1,16 +1,13 @@
 import mongoose from 'mongoose';
 import { LevenshteinDistance } from 'natural';
 
-const {
-    Schema: { Types }
-} = mongoose;
-
 export const guestSchema = new mongoose.Schema({
     firstName: { type: String, index: true },
     lastName: { type: String, index: true },
-    mealChoice: { type: Types.ObjectId, ref: 'MealOption' },
+    mealChoice: { type: String },
     songRecommendation: String,
-    attending: Boolean
+    attending: Boolean,
+    additional: Boolean
 });
 
 const GuestModel = mongoose.model('Guest', guestSchema);
@@ -20,6 +17,7 @@ const GuestModel = mongoose.model('Guest', guestSchema);
 // and sorted by relevance.
 // Returns an array of the top results.
 GuestModel.findByName = async ({ firstName = '', lastName = '' }) => {
+    if (!firstName && !lastName) return [];
     const name = ({ firstName: fName = '', lastName: lName = '' }) =>
         `${fName.trim()} ${lName.trim()}`.toLowerCase();
     const searchName = name({ firstName, lastName });
